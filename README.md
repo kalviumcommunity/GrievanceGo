@@ -1,4 +1,4 @@
-# TicketRaiser
+# GrievanceGo
 
 Finalized idea: Platform to raise issues with their elected/appointed representatives, and track their resolutions.
 
