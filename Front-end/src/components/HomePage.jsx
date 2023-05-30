@@ -1,6 +1,6 @@
 import bg from '../assets/bg.png'
-import Navbar from './navbar_homepage'
-import Home_section from './Hero_section'
+import NavbarHomepage from './NavbarHomepage'
+import Herosection from './HeroSection'
 
 function Home() {
     return (
@@ -9,14 +9,15 @@ function Home() {
                 backgroundImage: `url(${bg})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
+                backgroundRepeat: 'repeat-x',
                 height: '100vh',
-                width: '100vw',
+                width: '100%',
             }}
         >
-            <Navbar />
-            <Home_section />
+            <NavbarHomepage />
+            <Herosection />
         </div>
     )
 }
+
 export default Home

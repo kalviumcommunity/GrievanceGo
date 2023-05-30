@@ -1,12 +1,15 @@
 import Logo from '../assets/Group.png'
-import { Button, Box, Flex } from '@chakra-ui/react'
+import { Button, Box } from '@chakra-ui/react'
 import './fonts.css'
+import { useAuth0 } from '@auth0/auth0-react'
 
-function Navbar() {
+function NavbarHomepage() {
+    const { loginWithRedirect } = useAuth0()
     return (
         <Box
-            padding="50px"
-            paddingRight="52px"
+            paddingTop="3.83%"
+            paddingRight="4%"
+            paddingLeft="4%"
             h="160px"
             w="100vw"
             display="flex"
@@ -18,6 +21,7 @@ function Navbar() {
                 alt="logo-img"
             />
             <Button
+                onClick={() => loginWithRedirect()}
                 fontFamily="Roboto-Black"
                 fontSize="20px"
                 w="138px"
@@ -32,4 +36,4 @@ function Navbar() {
     )
 }
 
-export default Navbar
+export default NavbarHomepage

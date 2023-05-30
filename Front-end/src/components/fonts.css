@@ -14,3 +14,23 @@
     font-family: 'Poppins-Bold';
     src: url('../Fonts/Poppins-SemiBold.ttf');
 }
+@font-face {
+    font-family: 'Roboto-Medium';
+    src: url('../Fonts/Roboto-Medium.ttf');
+}
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('../Fonts/Roboto-Regular.ttf');
+}
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('../Fonts/Roboto-Bold.ttf');
+}
+@font-face {
+    font-family: 'Roboto-Italic';
+    src: url('../Fonts/Roboto-Italic.ttf');
+}
+
+TD button {
+    text-decoration: underline;
+}
