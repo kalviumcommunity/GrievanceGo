@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Box } from '@chakra-ui/react'
-import Logo from '../assets/Group.png'
+import Logo from '../assets/logo.png'
 
 function Navbar({ onRegisterNewClick }) {
     return (
