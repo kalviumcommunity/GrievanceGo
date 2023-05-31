@@ -1,0 +1,98 @@
+[
+    {
+        "complaint": "Potholes on city roads",
+        "createdOn": "22-4-2023",
+        "resolvedOn": "Not Yet",
+        "status": "New",
+        "replies": "View",
+        "action": "RESOLVE"
+    },
+    {
+        "complaint": "Overgrown vegetation obstructing sidewalks",
+        "createdOn": "16-8-2023",
+        "resolvedOn": "12-01-2023",
+        "status": "In Progress",
+        "replies": "View",
+        "action": "RESOLVE"
+    },
+    {
+        "complaint": "Insufficient street lighting in a neighborhood",
+        "createdOn": "19-12-2022",
+        "resolvedOn": "Not Yet",
+        "status": "Completed",
+        "replies": "View",
+        "action": "RESOLVE"
+    },
+    {
+        "complaint": "Noise pollution from construction sites or industrial areas",
+        "createdOn": "30-12-2004",
+        "resolvedOn": "24-2-2023",
+        "status": "Completed",
+        "replies": "View",
+        "action": "RESOLVE"
+    },
+    {
+        "complaint": "Illegal dumping or littering in public spaces",
+        "createdOn": "28-12-2004",
+        "resolvedOn": "01-02-2023",
+        "status": "Completed",
+        "replies": "View",
+        "action": "RESOLVE"
+    },
+    {
+        "complaint": "The Problem statement or the complaint",
+        "createdOn": "00-00-0000",
+        "resolvedOn": "Not Yet",
+        "status": "Completed",
+        "replies": "View",
+        "action": "RESOLVE"
+    },
+    {
+        "complaint": "The Problem statement or the complaint",
+        "createdOn": "00-00-0000",
+        "resolvedOn": "00-00-0000",
+        "status": "Completed",
+        "replies": "View",
+        "action": "RESOLVE"
+    },
+    {
+        "complaint": "The Problem statement or the complaint",
+        "createdOn": "00-00-0000",
+        "resolvedOn": "00-00-0000",
+        "status": "Completed",
+        "replies": "View",
+        "action": "RESOLVE"
+    },
+    {
+        "complaint": "The Problem statement or the complaint",
+        "createdOn": "00-00-0000",
+        "resolvedOn": "00-00-0000",
+        "status": "Completed",
+        "replies": "View",
+        "action": "RESOLVE"
+    },
+    {
+        "complaint": "The Problem statement or the complaint",
+        "createdOn": "00-00-0000",
+        "resolvedOn": "00-00-0000",
+        "status": "Completed",
+        "replies": "View",
+        "action": "RESOLVE"
+    },
+    {
+        "complaint": "The Problem statement or the complaint",
+        "createdOn": "00-00-0000",
+        "resolvedOn": "00-00-0000",
+        "status": "Completed",
+        "replies": "View",
+        "action": "RESOLVE"
+    },
+    {
+        "complaint": "The Problem statement or the complaint",
+        "createdOn": "00-00-0000",
+        "resolvedOn": "00-00-0000",
+        "status": "Completed",
+        "replies": "View",
+        "action": "RESOLVE"
+    }
+]
