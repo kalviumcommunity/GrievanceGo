@@ -1,15 +1,17 @@
-import { Flex, Text, Heading, ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react'
 import customTheme from './chakraTheme'
+import { Router, Route, Routes } from 'react-router-dom'
+import Home from './components/HomePage'
+import Dashboard from './components/dashboard'
+import NewComplaintModal from './components/NewComplaintModal'
 
 function App() {
     return (
         <ChakraProvider theme={customTheme}>
-            <Flex bg="white.400" h="100vh">
-                <Heading as="h1" size="4xl">
-                    Grievance Go
-                </Heading>
-                <Text>A platform where your complaints shall be solved</Text>
-            </Flex>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
         </ChakraProvider>
     )
 }
