@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
     Box,
     Table,
@@ -8,37 +8,26 @@ import {
     Th,
     Td,
     TableContainer,
+    useDisclosure,
 } from '@chakra-ui/react'
 import ReplyModal from './ReplyModal'
 import WarningModal from './WarningModal'
 import complaintsData from './tables.json'
 
 const ComplaintTable = ({ onComplaintClick }) => {
-    const [selectedComplaint, setSelectedComplaint] = useState(null)
-    const [isReplyModalOpen, setReplyModalOpen] = useState(false)
-    const [isWarningModalOpen, setWarningModalOpen] = useState(false)
-
-
-    const openReplyModal = complaint => {
-        setSelectedComplaint(complaint)
-        setReplyModalOpen(true)
-    }
-
-    const closeReplyModal = () => {
-        setSelectedComplaint(null)
-        setReplyModalOpen(false)
-    }
+    const {
+        isOpen: isReplyModalOpen,
+        onOpen: openReplyModal,
+        onClose: closeReplyModal,
+    } = useDisclosure()
+    const {
+        isOpen: isWarningModalOpen,
+        onOpen: openWarningModal,
+        onClose: closeWarningModal,
+    } = useDisclosure()
 
     const handleResolveClick = () => {
         openWarningModal()
-    }
-
-    const openWarningModal = () => {
-        setWarningModalOpen(true)
-    }
-
-    const closeWarningModal = () => {
-        setWarningModalOpen(false)
     }
 
     const complaints = complaintsData
@@ -130,12 +119,7 @@ const ComplaintTable = ({ onComplaintClick }) => {
                     </Table>
                 </TableContainer>
             </Box>
-            {isReplyModalOpen && (
-                <ReplyModal
-                    onClose={closeReplyModal}
-                    complaint={selectedComplaint}
-                />
-            )}
+            {isReplyModalOpen && <ReplyModal onClose={closeReplyModal} />}
             {isWarningModalOpen && <WarningModal onClose={closeWarningModal} />}
         </Box>
     )

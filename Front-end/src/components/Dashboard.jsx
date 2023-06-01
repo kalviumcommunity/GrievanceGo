@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { Box } from '@chakra-ui/react'
+import React from 'react'
+import { Box, useDisclosure } from '@chakra-ui/react'
+import { useState } from 'react'
 import bg2 from '../assets/bg2.png'
 import Navbar from './Navbar'
 import ComplaintTable from './tables'
@@ -8,37 +9,34 @@ import ComplaintViewModal from './ComplaintViewModal'
 import WarningModal from './WarningModal'
 
 const Dashboard = () => {
-    const [isNewComplaintModalOpen, setNewComplaintModalOpen] = useState(false)
-    const [isComplaintViewModalOpen, setComplaintViewModalOpen] =
-        useState(false)
+    const {
+        isOpen: isNewComplaintModalOpen,
+        onOpen: openNewComplaintModal,
+        onClose: closeNewComplaintModal,
+    } = useDisclosure()
+
+    const {
+        isOpen: isComplaintViewModalOpen,
+        onOpen: openComplaintViewModal,
+        onClose: closeComplaintViewModal,
+    } = useDisclosure()
+
+    const {
+        isOpen: isWarningModalOpen,
+        onOpen: openWarningModal,
+        onClose: closeWarningModal,
+    } = useDisclosure()
+
     const [selectedComplaint, setSelectedComplaint] = useState(null)
-    const [isWarningModalOpen, setWarningModalOpen] = useState(false)
 
-    const openNewComplaintModal = () => {
-        setNewComplaintModalOpen(true)
-    }
-
-    const closeNewComplaintModal = () => {
-        setNewComplaintModalOpen(false)
-    }
-
-    const openComplaintViewModal = complaint => {
+    const handleComplaintClick = complaint => {
         setSelectedComplaint(complaint)
-        setComplaintViewModalOpen(true)
+        openComplaintViewModal()
     }
 
-    const closeComplaintViewModal = () => {
-        setSelectedComplaint(null)
-        setComplaintViewModalOpen(false)
-    }
-
-    const openWarningModal = () => {
-        setWarningModalOpen(true)
-    }
-
-    const closeWarningModal = () => {
-        setWarningModalOpen(false)
-    }
+    // const handleResolveClick = () => {
+    //     ()
+    // }
 
     return (
         <Box
@@ -50,7 +48,7 @@ const Dashboard = () => {
         >
             <Navbar onRegisterNewClick={openNewComplaintModal} />
             <ComplaintTable
-                onComplaintClick={openComplaintViewModal}
+                onComplaintClick={handleComplaintClick}
                 onResolveClick={openWarningModal}
             />
 

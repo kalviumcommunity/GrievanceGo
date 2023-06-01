@@ -85,7 +85,6 @@ const ReplyModal = ({ onClose }) => {
                                             w="80%"
                                             fontSize="15px"
                                         >
-                                            use state hook
                                             {chat.message}
                                         </Text>
                                         <Text

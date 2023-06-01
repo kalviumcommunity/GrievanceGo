@@ -17,7 +17,6 @@ import {
 
 function NewComplaintModal({ onClose }) {
     return (
-        <>
             <Modal isOpen={true} onClose={onClose} isCentered>
                 <ModalOverlay />
                 <ModalContent
@@ -157,7 +156,6 @@ function NewComplaintModal({ onClose }) {
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-        </>
     )
 }
 
