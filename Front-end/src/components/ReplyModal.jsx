@@ -43,10 +43,7 @@ const ReplyModal = ({ onClose, complaint }) => {
                         fontFamily="Roboto-Bold"
                     >
                         <Box>
-                            <Text display="inline">
-                                {/* {console.log(Subject)} */}
-                                {Subject}
-                            </Text>
+                            <Text display="inline">{Subject}</Text>
 
                             <Text paddingTop="4px" fontFamily="Roboto-Regular">
                                 {Details}
@@ -70,7 +67,7 @@ const ReplyModal = ({ onClose, complaint }) => {
                             w="542px"
                             fontFamily="Roboto-Bold"
                         >
-                            {complaint.chats?.map((comp, index) => {
+                            {complaint.Chats?.map((comp, index) => {
                                 return (
                                     <Box key={index}>
                                         <Text fontSize="14px" color="black">
@@ -81,8 +78,7 @@ const ReplyModal = ({ onClose, complaint }) => {
                                             w="80%"
                                             fontSize="15px"
                                         >
-                                            {' '}
-                                            {comp.message}{' '}
+                                            {comp.message}
                                         </Text>
                                         <Text
                                             color="rgba(130, 130, 130, 1)"

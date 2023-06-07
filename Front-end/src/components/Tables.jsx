@@ -60,13 +60,13 @@ const ComplaintTable = ({ onComplaintClick, onResolveClick, onReplyClick }) => {
                                             </button>
                                         </Td>
                                         <Td fontFamily="Roboto-Regular">
-                                            {complaint.createdOn}
+                                            {complaint.CreatedOn}
                                         </Td>
                                         <Td fontFamily="Roboto-Regular">
-                                            {complaint.resolvedOn}
+                                            {complaint.ResolvedOn}
                                         </Td>
                                         <Td fontFamily="Roboto-Regular">
-                                            {complaint.status}
+                                            {complaint.Status}
                                         </Td>
                                         <Td
                                             fontFamily="Roboto-Regular"
@@ -77,15 +77,15 @@ const ComplaintTable = ({ onComplaintClick, onResolveClick, onReplyClick }) => {
                                                     onReplyClick(complaint)
                                                 }
                                             >
-                                                {complaint.replies}
-                                            </button>{' '}
+                                                {complaint.Replies}
+                                            </button>
                                         </Td>
                                         <Td
                                             borderRightRadius="7px"
                                             fontFamily="Roboto-Medium"
                                         >
                                             <button onClick={onResolveClick}>
-                                                {complaint.action}
+                                                {complaint.Action}
                                             </button>
                                         </Td>
                                     </Tr>

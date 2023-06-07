@@ -10,7 +10,6 @@ import {
     ModalBody,
     Divider,
 } from '@chakra-ui/react'
-import comp_info from './complaint_info.json'
 
 const ComplaintViewModal = ({ onClose, complaint }) => {
     return (
@@ -40,31 +39,31 @@ const ComplaintViewModal = ({ onClose, complaint }) => {
                         <Box display="flex" my={2.2}>
                             <Text fontFamily="Roboto-Bold" width={120}>
                                 Phone No:
-                            </Text>{' '}
+                            </Text>
                             {complaint['Phone No']}
                         </Box>
                         <Box display="flex" my={2.2}>
                             <Text fontFamily="Roboto-Bold" width={120}>
-                                Corporation or Panchayat Limit:
-                            </Text>{' '}
-                            {complaint['Corporation or Panchayat Limit']}
+                                AreaLimit:
+                            </Text>
+                            {complaint['AreaLimit']}
                         </Box>
                         <Box display="flex" my={2.2}>
                             <Text fontFamily="Roboto-Bold" width={120}>
                                 Ward No:
-                            </Text>{' '}
+                            </Text>
                             {complaint.WardNo}
                         </Box>
                         <Box display="flex" my={2.2}>
                             <Text fontFamily="Roboto-Bold" width={120}>
                                 Department:
-                            </Text>{' '}
+                            </Text>
                             {complaint.Department}
                         </Box>
                         <Box fontFamily="Roboto" display="flex" my={2.2}>
                             <Text fontFamily="Roboto-Bold" width={120}>
                                 Address:
-                            </Text>{' '}
+                            </Text>
                             {complaint.Address}
                         </Box>
                     </Box>

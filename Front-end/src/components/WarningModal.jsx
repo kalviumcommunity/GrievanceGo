@@ -26,7 +26,7 @@ const WarningModal = ({ onClose }) => {
                         paddingTop="20px"
                     >
                         Are you sure you want to mark this complaint as
-                        resolved? This action cannot be undone.{' '}
+                        resolved? This action cannot be undone.
                     </AlertDialogBody>
 
                     <AlertDialogFooter fontFamily="Roboto-Bold">
