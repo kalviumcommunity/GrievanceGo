@@ -40,7 +40,7 @@ const ComplaintViewModal = ({ onClose, complaint }) => {
                             <Text fontFamily="Roboto-Bold" width={120}>
                                 Phone No:
                             </Text>
-                            {complaint['Phone No']}
+                            {complaint['PhoneNo']}
                         </Box>
                         <Box display="flex" my={2.2}>
                             <Text fontFamily="Roboto-Bold" width={120}>

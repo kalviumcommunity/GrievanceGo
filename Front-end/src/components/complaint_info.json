@@ -1,7 +1,7 @@
 [
     {
         "Name": "urthu",
-        "Phone No": "1234567890",
+        "PhoneNo": "1234567890",
         "AreaLimit": "Cuddalore Corporation",
         "WardNo": "Ward XYZ",
         "Department": "PWD",
@@ -58,7 +58,7 @@
     },
     {
         "Name": "amurthu",
-        "Phone No": "1234567890",
+        "PhoneNo": "1234567890",
         "AreaLimit": "Cuddalore Corporation",
         "WardNo": "Ward XYZ",
         "Department": "PWD",
@@ -115,7 +115,7 @@
     },
     {
         "Name": "Krishnamurthu",
-        "Phone No": "1234567890",
+        "PhoneNo": "1234567890",
         "AreaLimit": "Cuddalore Corporation",
         "WardNo": "Ward XYZ",
         "Department": "PWD",
@@ -172,7 +172,7 @@
     },
     {
         "Name": "Krishnamurthu",
-        "Phone No": "1234567890",
+        "PhoneNo": "1234567890",
         "AreaLimit": "Cuddalore Corporation",
         "WardNo": "Ward XYZ",
         "Department": "PWD",
@@ -229,7 +229,7 @@
     },
     {
         "Name": "Krishnamurthu",
-        "Phone No": "1234567890",
+        "PhoneNo": "1234567890",
         "AreaLimit": "Cuddalore Corporation",
         "WardNo": "Ward XYZ",
         "Department": "PWD",
@@ -286,7 +286,7 @@
     },
     {
         "Name": "Krishnamurthu",
-        "Phone No": "1234567890",
+        "PhoneNo": "1234567890",
         "AreaLimit": "Cuddalore Corporation",
         "WardNo": "Ward XYZ",
         "Department": "PWD",
@@ -343,7 +343,7 @@
     },
     {
         "Name": "Krishnamurthu",
-        "Phone No": "1234567890",
+        "PhoneNo": "1234567890",
         "AreaLimit": "Cuddalore Corporation",
         "WardNo": "Ward XYZ",
         "Department": "PWD",
@@ -400,7 +400,7 @@
     },
     {
         "Name": "Krishnamurthu",
-        "Phone No": "1234567890",
+        "PhoneNo": "1234567890",
         "AreaLimit": "Cuddalore Corporation",
         "WardNo": "Ward XYZ",
         "Department": "PWD",
@@ -457,7 +457,7 @@
     },
     {
         "Name": "Krishnamurthu",
-        "Phone No": "1234567890",
+        "PhoneNo": "1234567890",
         "AreaLimit": "Cuddalore Corporation",
         "WardNo": "Ward XYZ",
         "Department": "PWD",
@@ -514,7 +514,7 @@
     },
     {
         "Name": "Krishnamurthu",
-        "Phone No": "1234567890",
+        "PhoneNo": "1234567890",
         "AreaLimit": "Cuddalore Corporation",
         "WardNo": "Ward XYZ",
         "Department": "PWD",
@@ -571,7 +571,7 @@
     },
     {
         "Name": "Krishnamurthu",
-        "Phone No": "1234567890",
+        "PhoneNo": "1234567890",
         "AreaLimit": "Cuddalore Corporation",
         "WardNo": "Ward XYZ",
         "Department": "PWD",
@@ -628,7 +628,7 @@
     },
     {
         "Name": "Krishnamurthu",
-        "Phone No": "1234567890",
+        "PhoneNo": "1234567890",
         "AreaLimit": "Cuddalore Corporation",
         "WardNo": "Ward XYZ",
         "Department": "PWD",
