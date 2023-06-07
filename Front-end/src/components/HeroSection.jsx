@@ -1,6 +1,5 @@
 import React from 'react'
 import { Box, Button } from '@chakra-ui/react'
-import './fonts.css'
 import { Link } from 'react-router-dom'
 const HeroSection = () => {
     return (

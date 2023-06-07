@@ -1,6 +1,5 @@
-import Logo from '../assets/Group.png'
+import Logo from '../assets/logo.png'
 import { Button, Box } from '@chakra-ui/react'
-import './fonts.css'
 import { useAuth0 } from '@auth0/auth0-react'
 
 function NavbarHomepage() {

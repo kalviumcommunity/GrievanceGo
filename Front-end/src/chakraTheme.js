@@ -11,7 +11,7 @@ const customTheme = extendTheme({
                 },
                 tr: {
                     borderRadius: '7px',
-                    '&:not(:first-child)': {
+                    '&:nth-child(n+2)': {
                         marginTop: '20px',
                     },
                 },
@@ -25,10 +25,10 @@ const customTheme = extendTheme({
                         height: '618px',
                     },
                 },
-                500:{
-                    dialogStyles:{
-                        width:'555px',
-                        height:'383px',
+                500: {
+                    dialogStyles: {
+                        width: '555px',
+                        height: '383px',
                     },
                 },
             },
