@@ -8,30 +8,10 @@ import {
     Th,
     Td,
     TableContainer,
-    useDisclosure,
 } from '@chakra-ui/react'
-import ReplyModal from './ReplyModal'
-import WarningModal from './WarningModal'
-import complaintsData from './tables.json'
+import complaintsData from './complaint_info.json'
 
-const ComplaintTable = ({ onComplaintClick }) => {
-    const {
-        isOpen: isReplyModalOpen,
-        onOpen: openReplyModal,
-        onClose: closeReplyModal,
-    } = useDisclosure()
-    const {
-        isOpen: isWarningModalOpen,
-        onOpen: openWarningModal,
-        onClose: closeWarningModal,
-    } = useDisclosure()
-
-    const handleResolveClick = () => {
-        openWarningModal()
-    }
-
-    const complaints = complaintsData
-
+const ComplaintTable = ({ onComplaintClick, onResolveClick, onReplyClick }) => {
     return (
         <Box paddingLeft="85px" paddingTop="35px" width="95%">
             <Box maxH="60vh" overflowY="auto">
@@ -58,12 +38,13 @@ const ComplaintTable = ({ onComplaintClick }) => {
                             <Tr h="26px"></Tr>
                         </Thead>
                         <Tbody alignItems="center">
-                            {complaints.map((complaint, index) => (
+                            {complaintsData.map((complaint, index) => (
                                 <React.Fragment key={index}>
                                     <Tr
                                         height="48px"
                                         bg="white"
                                         borderRadius="7px"
+                                        rowGap="20px"
                                     >
                                         <Td
                                             borderLeftRadius="7px"
@@ -75,7 +56,7 @@ const ComplaintTable = ({ onComplaintClick }) => {
                                                     onComplaintClick(complaint)
                                                 }
                                             >
-                                                {complaint.complaint}
+                                                {complaint.Subject}
                                             </button>
                                         </Td>
                                         <Td fontFamily="Roboto-Regular">
@@ -93,7 +74,7 @@ const ComplaintTable = ({ onComplaintClick }) => {
                                         >
                                             <button
                                                 onClick={() =>
-                                                    openReplyModal(complaint)
+                                                    onReplyClick(complaint)
                                                 }
                                             >
                                                 {complaint.replies}
@@ -103,24 +84,18 @@ const ComplaintTable = ({ onComplaintClick }) => {
                                             borderRightRadius="7px"
                                             fontFamily="Roboto-Medium"
                                         >
-                                            <button
-                                                onClick={handleResolveClick}
-                                            >
+                                            <button onClick={onResolveClick}>
                                                 {complaint.action}
                                             </button>
                                         </Td>
                                     </Tr>
-                                    {index < complaints.length - 1 && (
-                                        <Tr height="20px" />
-                                    )}
+                                    <br />
                                 </React.Fragment>
                             ))}
                         </Tbody>
                     </Table>
                 </TableContainer>
             </Box>
-            {isReplyModalOpen && <ReplyModal onClose={closeReplyModal} />}
-            {isWarningModalOpen && <WarningModal onClose={closeWarningModal} />}
         </Box>
     )
 }

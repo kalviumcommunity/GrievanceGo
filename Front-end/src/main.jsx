@@ -5,7 +5,7 @@ import customTheme from './chakraTheme'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import Auth0Provider from './auth_provider_history'
-import "./fonts.css"
+import './fonts.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>

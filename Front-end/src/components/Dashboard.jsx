@@ -7,6 +7,7 @@ import ComplaintTable from './tables'
 import NewComplaintModal from './NewComplaintModal'
 import ComplaintViewModal from './ComplaintViewModal'
 import WarningModal from './WarningModal'
+import ReplyModal from './ReplyModal'
 
 const Dashboard = () => {
     const {
@@ -27,16 +28,21 @@ const Dashboard = () => {
         onClose: closeWarningModal,
     } = useDisclosure()
 
-    const [selectedComplaint, setSelectedComplaint] = useState(null)
+    const {
+        isOpen: isReplyModalOpen,
+        onOpen: openReplyModal,
+        onClose: closeReplyModal,
+    } = useDisclosure()
 
+    const [selectedComplaint, setSelectedComplaint] = useState(null)
     const handleComplaintClick = complaint => {
         setSelectedComplaint(complaint)
         openComplaintViewModal()
     }
-
-    // const handleResolveClick = () => {
-    //     ()
-    // }
+    const handleReplyClick = complaint => {
+        setSelectedComplaint(complaint)
+        openReplyModal()
+    }
 
     return (
         <Box
@@ -50,6 +56,7 @@ const Dashboard = () => {
             <ComplaintTable
                 onComplaintClick={handleComplaintClick}
                 onResolveClick={openWarningModal}
+                onReplyClick={handleReplyClick}
             />
 
             {isNewComplaintModalOpen && (
@@ -62,7 +69,12 @@ const Dashboard = () => {
                     complaint={selectedComplaint}
                 />
             )}
-
+            {isReplyModalOpen && (
+                <ReplyModal
+                    onClose={closeReplyModal}
+                    complaint={selectedComplaint}
+                />
+            )}
             {isWarningModalOpen && <WarningModal onClose={closeWarningModal} />}
         </Box>
     )
