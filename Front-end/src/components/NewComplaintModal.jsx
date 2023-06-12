@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Modal,
     ModalOverlay,
@@ -14,8 +14,63 @@ import {
     FormLabel,
     Input,
 } from '@chakra-ui/react'
+import { Registration } from './Redux/actions'
+import { useDispatch } from 'react-redux'
 
 function NewComplaintModal({ onClose }) {
+    let [name, setName] = useState('')
+    let [wardno, setWardNo] = useState('')
+    let [phoneno, setPhoneNo] = useState('')
+    let [arealimit, setAreaLimit] = useState('')
+    let [subject, setSubject] = useState('')
+    let [department, setDepartment] = useState('')
+    let [address, setAddress] = useState('')
+    let [description, setDescription] = useState('')
+
+    const handleName = e => {
+        setName(e.target.value)
+    }
+    const handlewardno = e => {
+        setWardNo(e.target.value)
+    }
+    const handlePhoneno = e => {
+        setPhoneNo(e.target.value)
+    }
+    const handleAreaLimit = e => {
+        setAreaLimit(e.target.value)
+    }
+    const handleSubject = e => {
+        setSubject(e.target.value)
+    }
+    const handleDepartment = e => {
+        setDepartment(e.target.value)
+    }
+    const handleDescription = e => {
+        setDescription(e.target.value)
+    }
+    const handleAddress = e => {
+        // console.log(e.target.value)
+        setAddress(e.target.value)
+    }
+    console.log(address)
+
+    const dispatch = useDispatch()
+    const handleSubmit = () => {
+        dispatch(
+            Registration({
+                name,
+                wardno,
+                phoneno,
+                arealimit,
+                subject,
+                department,
+                address,
+                description,
+            })
+        )
+        onClose()
+    }
+
     return (
         <Modal isOpen={true} onClose={onClose} isCentered>
             <ModalOverlay />
@@ -46,6 +101,7 @@ function NewComplaintModal({ onClose }) {
                                     type="text"
                                     bg="white"
                                     placeholder="Name"
+                                    onChange={handleName}
                                 />
                             </FormControl>
                         </GridItem>
@@ -58,6 +114,7 @@ function NewComplaintModal({ onClose }) {
                                     type="text"
                                     bg="white"
                                     placeholder="Ward No"
+                                    onChange={handlewardno}
                                 />
                             </FormControl>
                         </GridItem>
@@ -70,6 +127,7 @@ function NewComplaintModal({ onClose }) {
                                     type="text"
                                     bg="white"
                                     placeholder="Phone No"
+                                    onChange={handlePhoneno}
                                 />
                             </FormControl>
                         </GridItem>
@@ -82,6 +140,7 @@ function NewComplaintModal({ onClose }) {
                                     type="text"
                                     bg="white"
                                     placeholder="AreaLimit"
+                                    onChange={handleAreaLimit}
                                 />
                             </FormControl>
                         </GridItem>
@@ -94,6 +153,7 @@ function NewComplaintModal({ onClose }) {
                                     type="text"
                                     bg="white"
                                     placeholder="Subject"
+                                    onChange={handleSubject}
                                 />
                             </FormControl>
                         </GridItem>
@@ -106,6 +166,7 @@ function NewComplaintModal({ onClose }) {
                                     type="text"
                                     bg="white"
                                     placeholder="Department(optional)"
+                                    onChange={handleDepartment}
                                 />
                             </FormControl>
                         </GridItem>
@@ -118,6 +179,7 @@ function NewComplaintModal({ onClose }) {
                                     type="text"
                                     bg="white"
                                     placeholder="Address (optional)"
+                                    onChange={handleAddress}
                                 />
                             </FormControl>
                         </GridItem>
@@ -130,6 +192,7 @@ function NewComplaintModal({ onClose }) {
                                     type="text"
                                     bg="white"
                                     placeholder="Describe your Complaint"
+                                    onChange={handleDescription}
                                 />
                             </FormControl>
                         </GridItem>
@@ -141,11 +204,11 @@ function NewComplaintModal({ onClose }) {
                         bgColor="rgba(30, 30, 30, 1)"
                         color="white"
                         mr={3}
-                        onClick={onClose}
+                        onClick={handleSubmit}
                     >
                         Submit
                     </Button>
-                    <Button variant="ghost" color="black">
+                    <Button variant="ghost" color="black" onClick={onClose}>
                         Cancel
                     </Button>
                 </ModalFooter>

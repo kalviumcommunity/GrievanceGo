@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect, useReducer } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getinfo } from './Redux/actions'
 import {
     Box,
     Table,
@@ -9,9 +11,21 @@ import {
     Td,
     TableContainer,
 } from '@chakra-ui/react'
-import complaintsData from './complaint_info.json'
+// import complaintsData from './complaint_info.json'
 
-const ComplaintTable = ({ onComplaintClick, onResolveClick, onReplyClick }) => {
+const ComplaintTable = ({
+    onComplaintClick,
+    onResolveClick,
+    onReplyClick,
+    complaintsData,
+}) => {
+    console.log('getting data from redux', complaintsData)
+
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getinfo())
+    }, [])
+
     return (
         <Box paddingLeft="85px" paddingTop="35px" width="95%">
             <Box maxH="60vh" overflowY="auto">
@@ -38,65 +52,78 @@ const ComplaintTable = ({ onComplaintClick, onResolveClick, onReplyClick }) => {
                             <Tr h="26px"></Tr>
                         </Thead>
                         <Tbody alignItems="center">
-                            {complaintsData.map((complaint, index) => (
-                                <React.Fragment key={index}>
-                                    <Tr
-                                        height="48px"
-                                        bg="white"
-                                        borderRadius="7px"
-                                        rowGap="20px"
-                                    >
-                                        <Td
-                                            borderLeftRadius="7px"
-                                            fontFamily="Roboto-Regular"
-                                            textDecoration="underline"
+                            {complaintsData.map((complaint, index) => {
+                                let dte = new Date(complaint.createdOn)
+
+                                return (
+                                    <React.Fragment key={index}>
+                                        <Tr
+                                            height="48px"
+                                            bg="white"
+                                            borderRadius="7px"
+                                            rowGap="20px"
                                         >
-                                            <button
-                                                onClick={() =>
-                                                    onComplaintClick(complaint)
-                                                }
+                                            <Td
+                                                borderLeftRadius="7px"
+                                                fontFamily="Roboto-Regular"
+                                                textDecoration="underline"
                                             >
-                                                {complaint.Subject}
-                                            </button>
-                                        </Td>
-                                        <Td fontFamily="Roboto-Regular">
-                                            {complaint.CreatedOn}
-                                        </Td>
-                                        <Td fontFamily="Roboto-Regular">
-                                            {complaint.ResolvedOn}
-                                        </Td>
-                                        <Td fontFamily="Roboto-Regular">
-                                            {complaint.Status}
-                                        </Td>
-                                        <Td
-                                            fontFamily="Roboto-Regular"
-                                            textDecoration="underline"
-                                        >
-                                            <button
-                                                onClick={() =>
-                                                    onReplyClick(complaint)
-                                                }
+                                                <button
+                                                    onClick={() =>
+                                                        onComplaintClick(
+                                                            complaint
+                                                        )
+                                                    }
+                                                >
+                                                    {complaint.subject}
+                                                </button>
+                                            </Td>
+                                            <Td fontFamily="Roboto-Regular">
+                                                {dte.getDate()}-
+                                                {dte.getMonth() + 1}-
+                                                {dte.getFullYear()}
+                                            </Td>
+                                            <Td fontFamily="Roboto-Regular">
+                                                {complaint.resolvedOn}
+                                            </Td>
+                                            <Td fontFamily="Roboto-Regular">
+                                                {complaint.status}
+                                            </Td>
+                                            <Td
+                                                fontFamily="Roboto-Regular"
+                                                textDecoration="underline"
                                             >
-                                                {complaint.Replies}
-                                            </button>
-                                        </Td>
-                                        <Td
-                                            borderRightRadius="7px"
-                                            fontFamily="Roboto-Medium"
-                                        >
-                                            <button onClick={onResolveClick}>
-                                                {complaint.Action}
-                                            </button>
-                                        </Td>
-                                    </Tr>
-                                    <br />
-                                </React.Fragment>
-                            ))}
+                                                <button
+                                                    onClick={() =>
+                                                        onReplyClick(complaint)
+                                                    }
+                                                >
+                                                    view
+                                                    {/* {complaint.Replies} */}
+                                                </button>
+                                            </Td>
+                                            <Td
+                                                borderRightRadius="7px"
+                                                fontFamily="Roboto-Medium"
+                                            >
+                                                <button
+                                                    onClick={onResolveClick}
+                                                >
+                                                    {/* {complaint.Action} */}
+                                                    resolve
+                                                </button>
+                                            </Td>
+                                        </Tr>
+                                        <br />
+                                    </React.Fragment>
+                                )
+                            })}
                         </Tbody>
                     </Table>
                 </TableContainer>
             </Box>
         </Box>
+        // <div>helloo</div>
     )
 }
 
