@@ -1,5 +1,4 @@
 import { GET_DETAILS, UPDATE_CHATS } from './action.type'
-// import  UPDATE_CHATS  from './action.type'
 
 const Registration = data => {
     const dataobj = {

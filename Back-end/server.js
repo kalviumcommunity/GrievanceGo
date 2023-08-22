@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const infopath = "../Front-end/src/components/complaint_info.json";
 const fs = require("fs");
 const connectDB = require("./DB/DB");
 const cors = require("cors");
@@ -15,7 +14,7 @@ app.use(cors());
 app.get("/api/info", async (req, res) => {
   try {
     const comp = await User.find();
-    console.log("comp", comp);
+    console.log("comp", comp); //Needs to be removed before deploying
     res.status(200).json(comp);
   } catch (error) {
     console.log(error);

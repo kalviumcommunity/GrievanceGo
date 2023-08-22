@@ -74,7 +74,6 @@ const Dashboard = () => {
                 onReplyClick={handleReplyClick}
                 complaintsData={complaintsData}
             />
-            // Main Table
             {isNewComplaintModalOpen && (
                 <NewComplaintModal onClose={closeNewComplaintModal} /> /// register new complaint
             )}
