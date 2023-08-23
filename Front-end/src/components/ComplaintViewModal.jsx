@@ -20,7 +20,7 @@ const ComplaintViewModal = ({ onClose, complaint }) => {
         dispatch(getinfo())
     }, [])
 
-    console.log('complaint in complaint modal', complaint.name)
+    console.log('complaint in complaint modal', complaint.name) //Needs to be removed before deploying
 
     return (
         <Modal isOpen={true} onClose={onClose} isCentered>

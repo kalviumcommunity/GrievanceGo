@@ -1,12 +1,10 @@
-import { UPDATE_CHATS, GET_DETAILS } from './action.type'
+import { UPDATE_CHATS, GET_DETAILS, RESOLVE_COMPLAINT } from './action.type'
 
 const initialState = {
     info: [],
-    // chats: [],
 }
 
 function reducer(state = initialState, { type, payload }) {
-    console.log('type', type)
     switch (type) {
         case GET_DETAILS:
             return {
@@ -18,6 +16,22 @@ function reducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 info: payload,
+            }
+
+        case RESOLVE_COMPLAINT:
+            const updatedInfo = state.info.map(complaint =>
+                complaint._id === payload.complaintId &&
+                complaint.status !== 'Resolved'
+                    ? {
+                          ...complaint,
+                          status: 'Resolved',
+                          resolvedOn: new Date(),
+                      }
+                    : complaint
+            )
+            return {
+                ...state,
+                info: updatedInfo,
             }
 
         default:

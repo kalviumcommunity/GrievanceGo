@@ -1,4 +1,4 @@
-import { GET_DETAILS, UPDATE_CHATS } from './action.type'
+import { GET_DETAILS, UPDATE_CHATS, RESOLVE_COMPLAINT } from './action.type'
 
 const Registration = data => {
     const dataobj = {
@@ -79,5 +79,31 @@ const addingchat = data => {
         }
     }
 }
+const resolveComplaint = complaintId => {
+    return async dispatch => {
+        try {
+            const response = await fetch(
+                `http://localhost:3000/api/updatestatus`,
+                {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: complaintId }),
+                }
+            )
 
-export { Registration, getinfo, addingchat }
+            const updatedComplaints = await response.json()
+
+            dispatch({
+                type: RESOLVE_COMPLAINT,
+                payload: {
+                    complaintId,
+                    updatedComplaints,
+                },
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export { Registration, getinfo, addingchat, resolveComplaint }

@@ -49,10 +49,10 @@ function NewComplaintModal({ onClose }) {
         setDescription(e.target.value)
     }
     const handleAddress = e => {
-        // console.log(e.target.value)
+        // console.log(e.target.value)//Needs to be removed before deploying
         setAddress(e.target.value)
     }
-    console.log(address)
+    console.log(address) //Needs to be removed before deploying
 
     const dispatch = useDispatch()
     const handleSubmit = () => {

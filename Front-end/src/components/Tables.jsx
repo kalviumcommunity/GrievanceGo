@@ -1,6 +1,6 @@
-import React, { useEffect, useReducer } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getinfo } from './Redux/actions'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { getinfo, resolveComplaint } from './Redux/actions' // Import the resolveComplaint action
 import {
     Box,
     Table,
@@ -11,7 +11,15 @@ import {
     Td,
     TableContainer,
 } from '@chakra-ui/react'
-// import complaintsData from './complaint_info.json'
+import WarningModal from './WarningModal'
+
+const formatDate = date => {
+    const formattedDate = new Date(date)
+    const day = formattedDate.getDate().toString().padStart(2, '0')
+    const month = (formattedDate.getMonth() + 1).toString().padStart(2, '0')
+    const year = formattedDate.getFullYear()
+    return `${day}-${month}-${year}`
+}
 
 const ComplaintTable = ({
     onComplaintClick,
@@ -19,12 +27,20 @@ const ComplaintTable = ({
     onReplyClick,
     complaintsData,
 }) => {
-    console.log('getting data from redux', complaintsData)
+    console.log('getting data from redux', complaintsData) //Needs to be removed before deploying
 
     const dispatch = useDispatch()
+    const [showWarningModal, setShowWarningModal] = useState(false) // State to show/hide warning modal
+    const [selectedComplaint, setSelectedComplaint] = useState(null) // State to store selected complaint
+
     useEffect(() => {
         dispatch(getinfo())
     }, [])
+
+    const handleResolveClick = complaint => {
+        setSelectedComplaint(complaint)
+        setShowWarningModal(true)
+    }
 
     return (
         <Box paddingLeft="85px" paddingTop="35px" width="95%">
@@ -54,6 +70,8 @@ const ComplaintTable = ({
                         <Tbody alignItems="center">
                             {complaintsData.map((complaint, index) => {
                                 let dte = new Date(complaint.createdOn)
+                                const isResolved =
+                                    complaint.status === 'Resolved' // Check if the complaint is resolved
 
                                 return (
                                     <React.Fragment key={index}>
@@ -79,12 +97,18 @@ const ComplaintTable = ({
                                                 </button>
                                             </Td>
                                             <Td fontFamily="Roboto-Regular">
-                                                {dte.getDate()}-
+                                                {/* {dte.getDate()}-
                                                 {dte.getMonth() + 1}-
-                                                {dte.getFullYear()}
+                                                {dte.getFullYear()} */}
+                                                {formatDate(
+                                                    complaint.createdOn
+                                                )}
                                             </Td>
                                             <Td fontFamily="Roboto-Regular">
-                                                {complaint.resolvedOn}
+                                                {/* {complaint.resolvedOn} */}
+                                                {formatDate(
+                                                    complaint.resolvedOn || '-'
+                                                )}
                                             </Td>
                                             <Td fontFamily="Roboto-Regular">
                                                 {complaint.status}
@@ -99,19 +123,26 @@ const ComplaintTable = ({
                                                     }
                                                 >
                                                     view
-                                                    {/* {complaint.Replies} */}
                                                 </button>
                                             </Td>
                                             <Td
                                                 borderRightRadius="7px"
                                                 fontFamily="Roboto-Medium"
                                             >
-                                                <button
-                                                    onClick={onResolveClick}
-                                                >
-                                                    {/* {complaint.Action} */}
-                                                    resolve
-                                                </button>
+                                                {/* Render the "Resolve" button based on the complaint's status */}
+                                                {isResolved ? (
+                                                    'Resolved' // Display a message instead of the button
+                                                ) : (
+                                                    <button
+                                                        onClick={() =>
+                                                            handleResolveClick(
+                                                                complaint
+                                                            )
+                                                        }
+                                                    >
+                                                        Resolve
+                                                    </button>
+                                                )}
                                             </Td>
                                         </Tr>
                                         <br />
@@ -122,8 +153,17 @@ const ComplaintTable = ({
                     </Table>
                 </TableContainer>
             </Box>
+            {showWarningModal && (
+                <WarningModal
+                    onClose={() => setShowWarningModal(false)}
+                    onConfirm={() => {
+                        // Dispatch an action to update the resolved date
+                        dispatch(resolveComplaint(selectedComplaint._id))
+                        setShowWarningModal(false)
+                    }}
+                />
+            )}
         </Box>
-        // <div>helloo</div>
     )
 }
 

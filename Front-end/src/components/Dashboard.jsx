@@ -38,7 +38,7 @@ const Dashboard = () => {
 
     const [selectedComplaint, setSelectedComplaint] = useState(null)
     const handleComplaintClick = complaint => {
-        console.log(complaint)
+        console.log(complaint) //Needs to be removed before deploying
         setSelectedComplaint(complaint)
         openComplaintViewModal()
     }
@@ -52,7 +52,7 @@ const Dashboard = () => {
         dispatch(getinfo())
     }, [])
 
-    console.log('name : ', selectedComplaint)
+    console.log('name : ', selectedComplaint) //Needs to be removed before deploying
 
     const handleReplyClick = complaint => {
         setSelectedComplaint(complaint)

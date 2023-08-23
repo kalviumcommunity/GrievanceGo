@@ -27,7 +27,7 @@ const ReplyModal = ({ onClose, complaint }) => {
     const redData = data_chats.filter(elem => {
         return elem._id == complaint._id
     })
-    // console.log('data_chats', redData)
+    // console.log('data_chats', redData) //Needs to be removed before deploying
 
     const dispatch = useDispatch()
     let addChat = () => {
