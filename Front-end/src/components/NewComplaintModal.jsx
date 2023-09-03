@@ -13,62 +13,116 @@ import {
     FormControl,
     FormLabel,
     Input,
+    Textarea,
+    Text,
 } from '@chakra-ui/react'
 import { Registration } from './Redux/actions'
 import { useDispatch } from 'react-redux'
 
 function NewComplaintModal({ onClose }) {
-    let [name, setName] = useState('')
-    let [wardno, setWardNo] = useState('')
-    let [phoneno, setPhoneNo] = useState('')
-    let [arealimit, setAreaLimit] = useState('')
-    let [subject, setSubject] = useState('')
-    let [department, setDepartment] = useState('')
-    let [address, setAddress] = useState('')
-    let [description, setDescription] = useState('')
+    const [name, setName] = useState('')
+    const [wardno, setWardNo] = useState('')
+    const [phoneno, setPhoneNo] = useState('')
+    const [arealimit, setAreaLimit] = useState('')
+    const [subject, setSubject] = useState('')
+    const [department, setDepartment] = useState('')
+    const [address, setAddress] = useState('')
+    const [description, setDescription] = useState('')
 
-    const handleName = e => {
-        setName(e.target.value)
+    // Define validation state for each field
+    const [validation, setValidation] = useState({
+        name: true,
+        wardno: true,
+        phoneno: true,
+        arealimit: true,
+        subject: true,
+        department: true,
+        address: true,
+        description: true,
+    })
+
+    const handleInputChange = (e, field) => {
+        const value = e.target.value
+        // Update the state of the respective field
+        switch (field) {
+            case 'name':
+                setName(value)
+                break
+            case 'wardno':
+                setWardNo(value)
+                break
+            case 'phoneno':
+                setPhoneNo(value)
+                break
+            case 'arealimit':
+                setAreaLimit(value)
+                break
+            case 'subject':
+                setSubject(value)
+                break
+            case 'department':
+                setDepartment(value)
+                break
+            case 'address':
+                setAddress(value)
+                break
+            case 'description':
+                setDescription(value)
+                break
+            default:
+                break
+        }
     }
-    const handlewardno = e => {
-        setWardNo(e.target.value)
-    }
-    const handlePhoneno = e => {
-        setPhoneNo(e.target.value)
-    }
-    const handleAreaLimit = e => {
-        setAreaLimit(e.target.value)
-    }
-    const handleSubject = e => {
-        setSubject(e.target.value)
-    }
-    const handleDepartment = e => {
-        setDepartment(e.target.value)
-    }
-    const handleDescription = e => {
-        setDescription(e.target.value)
-    }
-    const handleAddress = e => {
-        // console.log(e.target.value)//Needs to be removed before deploying
-        setAddress(e.target.value)
-    }
-    console.log(address) //Needs to be removed before deploying
 
     const dispatch = useDispatch()
+
     const handleSubmit = () => {
-        dispatch(
-            Registration({
-                name,
-                wardno,
-                phoneno,
-                arealimit,
-                subject,
-                department,
-                address,
-                description,
-            })
-        )
-        onClose()
+        // Validate the fields before submitting
+        const isValid = validateFields()
+        if (isValid) {
+            dispatch(
+                Registration({
+                    name,
+                    wardno,
+                    phoneno,
+                    arealimit,
+                    subject,
+                    department,
+                    address,
+                    description,
+                })
+            )
+            onClose()
+        }
+    }
+
+    const validateFields = () => {
+        const fieldsToValidate = [
+            { field: 'name', value: name },
+            { field: 'wardno', value: wardno },
+            { field: 'phoneno', value: phoneno },
+            { field: 'arealimit', value: arealimit },
+            { field: 'subject', value: subject },
+            { field: 'department', value: department },
+            { field: 'address', value: address },
+            { field: 'description', value: description },
+        ]
+
+        // Check if any of the required fields are empty
+        let isValid = true
+        const updatedValidation = { ...validation }
+
+        fieldsToValidate.forEach(field => {
+            if (!field.value.trim()) {
+                isValid = false
+                updatedValidation[field.field] = false
+            } else {
+                updatedValidation[field.field] = true
+            }
+        })
+
+        setValidation(updatedValidation)
+        return isValid
     }
 
     return (
@@ -77,9 +131,8 @@ function NewComplaintModal({ onClose }) {
             <ModalContent
                 bgColor="rgba(169,159, 222, 1)"
                 maxW="706px"
-                maxH="678px"
+                maxH="878px"
                 w="100%"
-                h="100%"
             >
                 <ModalHeader
                     fontFamily="Roboto-Medium"
@@ -93,106 +146,216 @@ function NewComplaintModal({ onClose }) {
                 <ModalBody>
                     <Grid gap={4} alignItems="center" paddingLeft="20px">
                         <GridItem colSpan={1}>
-                            <FormControl>
-                                <FormLabel>Name</FormLabel>
+                            <FormControl isInvalid={!validation.name}>
+                                <FormLabel>
+                                    Name{' '}
+                                    {validation.name ? null : (
+                                        <span
+                                            style={{
+                                                color: 'red',
+                                                fontWeight: 'normal',
+                                            }}
+                                        >
+                                            * Required
+                                        </span>
+                                    )}
+                                </FormLabel>
                                 <Input
                                     height="32px"
                                     width="288px"
                                     type="text"
                                     bg="white"
                                     placeholder="Name"
-                                    onChange={handleName}
+                                    onChange={e => handleInputChange(e, 'name')}
                                 />
                             </FormControl>
                         </GridItem>
                         <GridItem colSpan={1}>
-                            <FormControl>
-                                <FormLabel>Ward No</FormLabel>
+                            <FormControl isInvalid={!validation.wardno}>
+                                <FormLabel>
+                                    Ward No{' '}
+                                    {validation.wardno ? null : (
+                                        <span
+                                            style={{
+                                                color: 'red',
+                                                fontWeight: 'normal',
+                                            }}
+                                        >
+                                            * Required
+                                        </span>
+                                    )}
+                                </FormLabel>
                                 <Input
                                     height="32px"
                                     width="288px"
-                                    type="text"
+                                    type="number"
                                     bg="white"
                                     placeholder="Ward No"
-                                    onChange={handlewardno}
+                                    onChange={e =>
+                                        handleInputChange(e, 'wardno')
+                                    }
                                 />
                             </FormControl>
                         </GridItem>
                         <GridItem colSpan={1}>
-                            <FormControl>
-                                <FormLabel>Phone No</FormLabel>
+                            <FormControl isInvalid={!validation.phoneno}>
+                                <FormLabel>
+                                    Phone No{' '}
+                                    {validation.phoneno ? null : (
+                                        <span
+                                            style={{
+                                                color: 'red',
+                                                fontWeight: 'normal',
+                                            }}
+                                        >
+                                            * Required
+                                        </span>
+                                    )}
+                                </FormLabel>
                                 <Input
                                     height="32px"
                                     width="288px"
-                                    type="text"
+                                    type="number"
                                     bg="white"
                                     placeholder="Phone No"
-                                    onChange={handlePhoneno}
+                                    onChange={e =>
+                                        handleInputChange(e, 'phoneno')
+                                    }
                                 />
                             </FormControl>
                         </GridItem>
                         <GridItem colSpan={1}>
-                            <FormControl>
-                                <FormLabel>AreaLimit</FormLabel>
+                            <FormControl isInvalid={!validation.arealimit}>
+                                <FormLabel>
+                                    AreaLimit{'  '}
+                                    {validation.arealimit ? null : (
+                                        <span
+                                            style={{
+                                                color: 'red',
+                                                fontWeight: 'normal',
+                                            }}
+                                        >
+                                            * Required
+                                        </span>
+                                    )}
+                                </FormLabel>
                                 <Input
                                     height="32px"
                                     width="288px"
                                     type="text"
                                     bg="white"
                                     placeholder="AreaLimit"
-                                    onChange={handleAreaLimit}
+                                    onChange={e =>
+                                        handleInputChange(e, 'arealimit')
+                                    }
                                 />
                             </FormControl>
                         </GridItem>
                         <GridItem colSpan={1}>
-                            <FormControl>
-                                <FormLabel>Subject</FormLabel>
+                            <FormControl isInvalid={!validation.subject}>
+                                <FormLabel>
+                                    Subject{' '}
+                                    {validation.subject ? null : (
+                                        <span
+                                            style={{
+                                                color: 'red',
+                                                fontWeight: 'normal',
+                                            }}
+                                        >
+                                            * Required
+                                        </span>
+                                    )}
+                                </FormLabel>
                                 <Input
                                     height="32px"
                                     width="288px"
                                     type="text"
                                     bg="white"
                                     placeholder="Subject"
-                                    onChange={handleSubject}
+                                    onChange={e =>
+                                        handleInputChange(e, 'subject')
+                                    }
                                 />
                             </FormControl>
                         </GridItem>
                         <GridItem colSpan={1}>
-                            <FormControl>
-                                <FormLabel>Department</FormLabel>
+                            <FormControl isInvalid={!validation.department}>
+                                <FormLabel>
+                                    Department{' '}
+                                    {validation.department ? null : (
+                                        <span
+                                            style={{
+                                                color: 'red',
+                                                fontWeight: 'normal',
+                                            }}
+                                        >
+                                            * Required
+                                        </span>
+                                    )}
+                                </FormLabel>
                                 <Input
                                     height="32px"
                                     width="288px"
                                     type="text"
                                     bg="white"
-                                    placeholder="Department(optional)"
-                                    onChange={handleDepartment}
+                                    placeholder="Department"
+                                    onChange={e =>
+                                        handleInputChange(e, 'department')
+                                    }
                                 />
                             </FormControl>
                         </GridItem>
                         <GridItem colSpan={2}>
-                            <FormControl>
-                                <FormLabel>Address</FormLabel>
+                            <FormControl isInvalid={!validation.address}>
+                                <FormLabel>
+                                    Address{' '}
+                                    {validation.address ? null : (
+                                        <span
+                                            style={{
+                                                color: 'red',
+                                                fontWeight: 'normal',
+                                            }}
+                                        >
+                                            * Required
+                                        </span>
+                                    )}
+                                </FormLabel>
                                 <Input
                                     height="32px"
                                     width="621px"
                                     type="text"
                                     bg="white"
-                                    placeholder="Address (optional)"
-                                    onChange={handleAddress}
+                                    placeholder="Address"
+                                    onChange={e =>
+                                        handleInputChange(e, 'address')
+                                    }
                                 />
                             </FormControl>
                         </GridItem>
                         <GridItem colSpan={2}>
-                            <FormControl>
-                                <FormLabel>Describe your Complaint</FormLabel>
-                                <Input
+                            <FormControl isInvalid={!validation.description}>
+                                <FormLabel>
+                                    Describe your Complaint{' '}
+                                    {validation.description ? null : (
+                                        <span
+                                            style={{
+                                                color: 'red',
+                                                fontWeight: 'normal',
+                                            }}
+                                        >
+                                            * Required
+                                        </span>
+                                    )}
+                                </FormLabel>
+                                <Textarea
                                     height="120px"
                                     width="621px"
                                     type="text"
                                     bg="white"
                                     placeholder="Describe your Complaint"
-                                    onChange={handleDescription}
+                                    onChange={e =>
+                                        handleInputChange(e, 'description')
+                                    }
                                 />
                             </FormControl>
                         </GridItem>

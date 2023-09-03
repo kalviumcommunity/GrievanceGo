@@ -3,7 +3,7 @@
     "start": "nodemon express.js"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^3.0.1"
   },
   "name": "back-end",
   "version": "1.0.0",

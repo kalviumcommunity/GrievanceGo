@@ -22,6 +22,6 @@ const DataSchema = mongoose.Schema(
 
 // module.exports = mongoose.model("reginfo", DataSchema);
 
-const User = mongoose.model("reginfo", DataSchema);
+const User = mongoose.model("Complaint Data", DataSchema);
 
 module.exports = { User };

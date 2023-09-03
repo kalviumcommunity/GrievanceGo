@@ -10,8 +10,13 @@ import {
     Th,
     Td,
     TableContainer,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverBody,
 } from '@chakra-ui/react'
 import WarningModal from './WarningModal'
+import sort from '../assets/sort.svg'
 
 const formatDate = date => {
     const formattedDate = new Date(date)
@@ -57,9 +62,113 @@ const ComplaintTable = ({
                                 <Th borderLeftRadius="7px" fontSize="14px">
                                     Complaint
                                 </Th>
+                                <Th fontSize="14px">
+                                    Department{' '}
+                                    <Popover trigger="hover">
+                                        <PopoverTrigger>
+                                            <Box
+                                                as="button"
+                                                style={{
+                                                    backgroundColor: 'white',
+                                                    padding: '3px',
+                                                    borderRadius: '2px',
+                                                }}
+                                            >
+                                                <img
+                                                    src={sort}
+                                                    alt="Sort"
+                                                    style={{
+                                                        width: '10px',
+                                                        height: '10px',
+                                                    }}
+                                                />
+                                            </Box>
+                                        </PopoverTrigger>
+                                        <PopoverContent
+                                            color="black"
+                                            fontFamily="body"
+                                            fontSize="12px"
+                                            width="max-content"
+                                            placement="top"
+                                        >
+                                            <PopoverBody>
+                                                A-Z || Z-A
+                                            </PopoverBody>
+                                        </PopoverContent>
+                                    </Popover>
+                                </Th>
                                 <Th fontSize="14px">Created On</Th>
-                                <Th fontSize="14px">Resolved On</Th>
-                                <Th fontSize="14px">Status</Th>
+                                <Th fontSize="14px">
+                                    Resolved On{' '}
+                                    <Popover trigger="hover">
+                                        <PopoverTrigger>
+                                            <Box
+                                                as="button"
+                                                style={{
+                                                    backgroundColor: 'white',
+                                                    padding: '3px',
+                                                    borderRadius: '2px',
+                                                }}
+                                            >
+                                                <img
+                                                    src={sort}
+                                                    alt="Sort"
+                                                    style={{
+                                                        width: '10px',
+                                                        height: '10px',
+                                                    }}
+                                                />
+                                            </Box>
+                                        </PopoverTrigger>
+                                        <PopoverContent
+                                            color="black"
+                                            fontFamily="body"
+                                            fontSize="12px"
+                                            width="max-content"
+                                            placement="top"
+                                        >
+                                            <PopoverBody>
+                                                Ascending || Descending
+                                            </PopoverBody>
+                                        </PopoverContent>
+                                    </Popover>
+                                </Th>
+
+                                <Th fontSize="14px">
+                                    Status{' '}
+                                    <Popover
+                                        placement="top-start"
+                                        trigger="hover"
+                                    >
+                                        <PopoverTrigger>
+                                            <Box
+                                                as="button"
+                                                style={{
+                                                    backgroundColor: 'white',
+                                                    padding: '3px',
+                                                    borderRadius: '2px',
+                                                }}
+                                            >
+                                                <img
+                                                    src={sort}
+                                                    alt="Sort"
+                                                    style={{
+                                                        width: '10px',
+                                                        height: '10px',
+                                                    }}
+                                                />
+                                            </Box>
+                                        </PopoverTrigger>
+                                        <PopoverContent
+                                            color="black"
+                                            fontSize="12px"
+                                            width="max-content"
+                                            placement="top"
+                                        >
+                                            <PopoverBody>Sort </PopoverBody>
+                                        </PopoverContent>
+                                    </Popover>
+                                </Th>
                                 <Th fontSize="14px">Replies</Th>
                                 <Th fontSize="14px" borderRightRadius="7px">
                                     Action
@@ -97,9 +206,12 @@ const ComplaintTable = ({
                                                 </button>
                                             </Td>
                                             <Td fontFamily="Roboto-Regular">
+                                                {complaint.department}
+                                            </Td>
+                                            <Td fontFamily="Roboto-Regular">
                                                 {/* {dte.getDate()}-
-                                                {dte.getMonth() + 1}-
-                                                {dte.getFullYear()} */}
+                                                    {dte.getMonth() + 1}-
+                                                    {dte.getFullYear()} */}
                                                 {formatDate(
                                                     complaint.createdOn
                                                 )}
