@@ -46,7 +46,7 @@ app.post("/api/addinfo", async (req, res) => {
     address,
     description,
     createdOn: new Date(),
-    resolvedOn: null,
+    resolvedOn: "null",
     status: "In progress",
   });
   const bdta = await User.find();

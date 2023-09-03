@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getinfo, resolveComplaint } from './Redux/actions' // Import the resolveComplaint action
+import { getinfo, resolveComplaint } from './Redux/actions'
 import {
     Box,
     Table,
@@ -16,9 +16,13 @@ import {
     PopoverBody,
 } from '@chakra-ui/react'
 import WarningModal from './WarningModal'
-import sort from '../assets/sort.svg'
+import sortIcon from '../assets/sort.svg' // Import icon for sorting
 
 const formatDate = date => {
+    if (isNaN(new Date(date).getTime())) {
+        return 'Not Yet'
+    }
+
     const formattedDate = new Date(date)
     const day = formattedDate.getDate().toString().padStart(2, '0')
     const month = (formattedDate.getMonth() + 1).toString().padStart(2, '0')
@@ -32,11 +36,14 @@ const ComplaintTable = ({
     onReplyClick,
     complaintsData,
 }) => {
-    console.log('getting data from redux', complaintsData) //Needs to be removed before deploying
-
     const dispatch = useDispatch()
-    const [showWarningModal, setShowWarningModal] = useState(false) // State to show/hide warning modal
-    const [selectedComplaint, setSelectedComplaint] = useState(null) // State to store selected complaint
+    const [showWarningModal, setShowWarningModal] = useState(false)
+    const [selectedComplaint, setSelectedComplaint] = useState(null)
+    const [sortingOrder, setSortingOrder] = useState({
+        department: null, // Initially set to null to indicate no sorting
+        status: null, // Initially set to null to indicate no sorting
+        resolvedOn: null, // Initially set to null to indicate no sorting
+    })
 
     useEffect(() => {
         dispatch(getinfo())
@@ -45,6 +52,48 @@ const ComplaintTable = ({
     const handleResolveClick = complaint => {
         setSelectedComplaint(complaint)
         setShowWarningModal(true)
+    }
+
+    const toggleSortingOrder = column => {
+        setSortingOrder(prevOrder => ({
+            ...prevOrder,
+            [column]: prevOrder[column] === 'asc' ? 'desc' : 'asc',
+        }))
+    }
+
+    const sortedComplaintsData = [...complaintsData]
+
+    if (sortingOrder.department) {
+        sortedComplaintsData.sort((a, b) => {
+            if (sortingOrder.department === 'asc') {
+                return a.department.localeCompare(b.department)
+            } else {
+                return b.department.localeCompare(a.department)
+            }
+        })
+    }
+
+    if (sortingOrder.status) {
+        sortedComplaintsData.sort((a, b) => {
+            if (sortingOrder.status === 'asc') {
+                return a.status.localeCompare(b.status)
+            } else {
+                return b.status.localeCompare(a.status)
+            }
+        })
+    }
+
+    if (sortingOrder.resolvedOn) {
+        sortedComplaintsData.sort((a, b) => {
+            const dateA = new Date(a.resolvedOn || 0)
+            const dateB = new Date(b.resolvedOn || 0)
+
+            if (sortingOrder.resolvedOn === 'asc') {
+                return dateA - dateB
+            } else {
+                return dateB - dateA
+            }
+        })
     }
 
     return (
@@ -73,13 +122,23 @@ const ComplaintTable = ({
                                                     padding: '3px',
                                                     borderRadius: '2px',
                                                 }}
+                                                onClick={() =>
+                                                    toggleSortingOrder(
+                                                        'department'
+                                                    )
+                                                }
                                             >
                                                 <img
-                                                    src={sort}
+                                                    src={sortIcon}
                                                     alt="Sort"
                                                     style={{
                                                         width: '10px',
                                                         height: '10px',
+                                                        transform:
+                                                            sortingOrder.department ===
+                                                            'asc'
+                                                                ? 'rotate(0deg)'
+                                                                : 'rotate(180deg)',
                                                     }}
                                                 />
                                             </Box>
@@ -109,13 +168,23 @@ const ComplaintTable = ({
                                                     padding: '3px',
                                                     borderRadius: '2px',
                                                 }}
+                                                onClick={() =>
+                                                    toggleSortingOrder(
+                                                        'resolvedOn'
+                                                    )
+                                                }
                                             >
                                                 <img
-                                                    src={sort}
+                                                    src={sortIcon}
                                                     alt="Sort"
                                                     style={{
                                                         width: '10px',
                                                         height: '10px',
+                                                        transform:
+                                                            sortingOrder.resolvedOn ===
+                                                            'asc'
+                                                                ? 'rotate(0deg)'
+                                                                : 'rotate(180deg)',
                                                     }}
                                                 />
                                             </Box>
@@ -133,13 +202,9 @@ const ComplaintTable = ({
                                         </PopoverContent>
                                     </Popover>
                                 </Th>
-
                                 <Th fontSize="14px">
                                     Status{' '}
-                                    <Popover
-                                        placement="top-start"
-                                        trigger="hover"
-                                    >
+                                    <Popover trigger="hover">
                                         <PopoverTrigger>
                                             <Box
                                                 as="button"
@@ -148,24 +213,35 @@ const ComplaintTable = ({
                                                     padding: '3px',
                                                     borderRadius: '2px',
                                                 }}
+                                                onClick={() =>
+                                                    toggleSortingOrder('status')
+                                                }
                                             >
                                                 <img
-                                                    src={sort}
+                                                    src={sortIcon}
                                                     alt="Sort"
                                                     style={{
                                                         width: '10px',
                                                         height: '10px',
+                                                        transform:
+                                                            sortingOrder.status ===
+                                                            'asc'
+                                                                ? 'rotate(0deg)'
+                                                                : 'rotate(180deg)',
                                                     }}
                                                 />
                                             </Box>
                                         </PopoverTrigger>
                                         <PopoverContent
                                             color="black"
+                                            fontFamily="body"
                                             fontSize="12px"
                                             width="max-content"
                                             placement="top"
                                         >
-                                            <PopoverBody>Sort </PopoverBody>
+                                            <PopoverBody>
+                                                A-Z || Z-A
+                                            </PopoverBody>
                                         </PopoverContent>
                                     </Popover>
                                 </Th>
@@ -177,10 +253,10 @@ const ComplaintTable = ({
                             <Tr h="26px"></Tr>
                         </Thead>
                         <Tbody alignItems="center">
-                            {complaintsData.map((complaint, index) => {
+                            {sortedComplaintsData.map((complaint, index) => {
                                 let dte = new Date(complaint.createdOn)
                                 const isResolved =
-                                    complaint.status === 'Resolved' // Check if the complaint is resolved
+                                    complaint.status === 'Resolved'
 
                                 return (
                                     <React.Fragment key={index}>
@@ -209,15 +285,11 @@ const ComplaintTable = ({
                                                 {complaint.department}
                                             </Td>
                                             <Td fontFamily="Roboto-Regular">
-                                                {/* {dte.getDate()}-
-                                                    {dte.getMonth() + 1}-
-                                                    {dte.getFullYear()} */}
                                                 {formatDate(
                                                     complaint.createdOn
                                                 )}
                                             </Td>
                                             <Td fontFamily="Roboto-Regular">
-                                                {/* {complaint.resolvedOn} */}
                                                 {formatDate(
                                                     complaint.resolvedOn || '-'
                                                 )}
@@ -241,9 +313,8 @@ const ComplaintTable = ({
                                                 borderRightRadius="7px"
                                                 fontFamily="Roboto-Medium"
                                             >
-                                                {/* Render the "Resolve" button based on the complaint's status */}
                                                 {isResolved ? (
-                                                    'Resolved' // Display a message instead of the button
+                                                    'Resolved'
                                                 ) : (
                                                     <button
                                                         onClick={() =>
@@ -269,7 +340,6 @@ const ComplaintTable = ({
                 <WarningModal
                     onClose={() => setShowWarningModal(false)}
                     onConfirm={() => {
-                        // Dispatch an action to update the resolved date
                         dispatch(resolveComplaint(selectedComplaint._id))
                         setShowWarningModal(false)
                     }}
